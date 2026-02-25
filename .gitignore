@@ -1,0 +1,8 @@
+*.class
+target/
+*.lst
+.vscode/
+*.txt
+.env
+.DS_Store
+*.log
