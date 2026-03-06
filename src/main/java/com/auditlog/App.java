@@ -39,10 +39,17 @@ public class App {
         // Anchor the hash to the blockchain
         BlockchainAnchor anchor = new BlockchainAnchor(infuraUrl, privateKey);
         String txHash = anchor.anchorHash(hash);
-
         System.out.println("-----------------------------------");
         System.out.println("✅ Audit hash anchored to blockchain!");
-        System.out.println("📌 Transaction Hash: " + txHash);
+        System.out.println("-----------------------------------");
+
+        // Wait a few seconds for transaction to propagate
+        System.out.println("⏳ Waiting for transaction to propagate...");
+        Thread.sleep(5000);
+
+        // Verify the audit event against the blockchain
+        AuditVerifier verifier = new AuditVerifier(infuraUrl);
+        verifier.verify(event, txHash);
 
         web3.shutdown();
     }
